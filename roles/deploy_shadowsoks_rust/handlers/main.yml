@@ -1,0 +1,25 @@
+---
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+    
+- name: Start ssserver
+  systemd:
+     name: ssserver
+     state: started
+     enabled: yes
+
+- name: Reloaded ssserver
+  systemd:
+     name: ssserver
+     state: reloaded
+     enabled: yes
+
+- name: Open port
+  firewalld:
+    port: "{{ port_enable }}"
+    proto: "{{ proto_enable }}"
+    permanent: yes
+    state: enabled
+    immediate: yes
+# handlers file for deploy_shadowsoks_rust

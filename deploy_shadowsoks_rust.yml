@@ -1,0 +1,7 @@
+---
+- name: Deploy shadowsoks rust
+  hosts: "{{ MYHOSTS }}"
+  become: yes
+
+  roles:
+     - { role: deploy_shadowsoks_rust, when: ansible_system == 'Linux'}

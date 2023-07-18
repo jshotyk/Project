@@ -1,0 +1,12 @@
+[Unit]
+Description=Shadowsocks Server
+Wants=network-online.target
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/ssserver -c {{destin_folder_shadowsocks}}/config.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

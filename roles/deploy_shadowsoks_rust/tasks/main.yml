@@ -1,0 +1,62 @@
+---
+- name: Install epel-release repository
+  dnf:
+      name: epel-release
+      state: present
+
+- name: Install dependencies
+  dnf:
+        name: [wget, tar, git]
+        state: present
+
+- name: Download shadowsocks-rust archive
+  get_url:
+        url: "{{ shadowsocks_rust}}"
+        dest: "/tmp/shadowsocks.tar.xz"
+        mode: 0644
+           
+- name: Extract shadowsocks-rust archive
+  unarchive:
+        src: "/tmp/shadowsocks.tar.xz"
+        dest: "/bin"
+        remote_src: yes
+        creates: /bin/ssserver
+
+- name: Download V2Ray plugin
+  get_url:
+        url: "{{ V2Ray_plugin }}"
+        dest: "/tmp/v2ray.tar.gz"
+        mode: 0644
+            
+- name: Extract V2Ray archive
+  unarchive:
+         src: "/tmp/v2ray.tar.gz"
+         dest: "/bin"
+         remote_src: yes
+         extra_opts: [--transform=s|.*|v2ray-plugin|]
+         creates: /bin/v2ray-plugin
+
+- name: Open port
+  firewalld:
+       port: "{{ port_enable }}"
+       proto: "{{ proto_enable }}"
+       permanent: yes
+       state: enabled
+       immediate: yes
+
+- name: Create Shadowsocks-Rust config directory
+  file:
+       path: /etc/shadowsocks
+       state: directory
+
+- name: Generate ssserver.service
+  template: src=ssserver.j2 dest={{ destin_folder }}/ssserver.service mode=0555
+  notify:
+     - Reload systemd
+     
+
+- name: Generate config.json
+  template: src=config.j2 dest={{ destin_folder_shadowsocks }}/config.json mode=0555
+  notify:
+    - Start ssserver
+    
