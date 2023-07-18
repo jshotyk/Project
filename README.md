@@ -28,7 +28,7 @@
 - `port_disable`: Переменная закрывающая порт использует шаблон `config.j2` и playbook `roles/tasks/main.yml` - name: Open port.
 - `proto_enable`: Переменная включает протокол использует шаблон `config.j2` и playbook `roles/tasks/main.yml` - name: Open port.
 - `proto_disable`: Переменная отключает протокол использует шаблон `config.j2` и playbook `roles/tasks/main.yml` - name: Open port.
-##### Так же неоходимо настроить переменную в playbook в каталоге `roles/vars/main.yml`:
+##### Так же необходимо настроить переменную в playbook в каталоге `roles/vars/main.yml`:
 - `password_shadowsoks` использует шаблон `config.j2`, предварительно зашифрован vault.
 ## Ограничения
 - Этот playbook предполагает, что целевые хосты работают под управлением операционной системы Linux.
