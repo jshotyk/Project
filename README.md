@@ -24,7 +24,7 @@
 - `destin_folder_shadowsocks`: Каталог, в котором будет создан файл `config.json`.
 - `shadowsocks_rust`: URL архива Shadowsocks Rust.
 - `V2Ray_plugin`: URL плагина V2Ray.
-- `port_enable`: Переменная открывающая пот
+- `port_enable`: Переменная открывающая порт использует шаблон config.j2 и playbook roles/tasks/main.yml - name: Open port
 - `port_disable`: "443"
 - `proto_enable`: "tcp"
 - `proto_disable`: "udp"
