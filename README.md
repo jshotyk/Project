@@ -12,9 +12,9 @@
 2. Запустите playbook:
    ```
    ansible-playbook deploy_shadowsoks_rust.yml --extra-var "MYHOSTS="Наименование вашей группы"" --vault-password-file=password.txt
-   # необходимо поместить пароль vault в файл password.txt
+  
    ```
-
+#### Hеобходимо поместить пароль vault в файл password.txt
 3. Playbook установит необходимые зависимости, загрузит архив Shadowsocks Rust, извлечет его, загрузит плагин V2Ray, создаст директорию конфигурации, сгенерирует файл `ssserver.service` и файл `config.json`, а затем запустит сервер Shadowsocks Rust.
 
 ## Настройка
